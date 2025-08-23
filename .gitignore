@@ -1,0 +1,22 @@
+# Node dependencies
+node_modules/
+
+# Playwright test results & reports
+test-results/
+playwright-report/
+blob-report/
+trace.zip
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
