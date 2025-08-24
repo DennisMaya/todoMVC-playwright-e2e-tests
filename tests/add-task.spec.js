@@ -37,5 +37,11 @@ test.describe('TodoMVC - Add Todo Workflow', () => {
         await page.getByTestId('text-input').fill(' walk the dog ');
         await page.keyboard.press('Enter');
         await expect(page.locator('.todo-list li')).toHaveText(['walk the dog']);
-    })
+    });
+
+    test('should not add a todo for an empty string', async ({page}) => {
+       await page.getByTestId('text-input') .fill('');
+       await page.keyboard.press('Enter');
+       await expect(page.locator('.todo-list li')).toHaveCount(0);
+    });
 });
