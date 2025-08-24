@@ -20,10 +20,12 @@ test.describe('TodoMVC - Add Todo Workflow', () => {
     test('should add 3 new todos in order', async({page}) => {
         const todos = ['Task 1', 'Task 2', 'Task3']
 
+        //Adds 3 todos
         for (const todo of todos){
             await page.getByTestId('text-input').fill(todo);
             await page.keyboard.press('Enter');
         }
+
         //Check that there are exactly 3 todos
         const todoItems = page.locator('.todo-list li');
         await expect(todoItems).toHaveCount(3);
@@ -34,14 +36,23 @@ test.describe('TodoMVC - Add Todo Workflow', () => {
     });
 
     test('should trim white space from text input after adding todo', async ({page}) => {
+        //Check that white space is trimmed from text input
         await page.getByTestId('text-input').fill(' walk the dog ');
         await page.keyboard.press('Enter');
         await expect(page.locator('.todo-list li')).toHaveText(['walk the dog']);
     });
 
     test('should not add a todo for an empty string', async ({page}) => {
+        //Check that an empty string todo cannot be added
        await page.getByTestId('text-input') .fill('');
        await page.keyboard.press('Enter');
        await expect(page.locator('.todo-list li')).toHaveCount(0);
+    });
+
+    test('should not add a todo of white space', async ({page}) => {
+        //Check that a todo of whites pace cannot be added
+        await page.getByTestId('text-input') .fill('    ');
+        await page.keyboard.press('Enter');
+        await expect(page.locator('.todo-list li')).toHaveCount(0);
     });
 });
