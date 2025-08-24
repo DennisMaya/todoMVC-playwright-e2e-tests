@@ -16,4 +16,20 @@ test.describe('TodoMVC - Add Todo Workflow', () => {
         await page.keyboard.press('Enter');
         await expect(page.getByTestId('text-input')).toHaveValue(''); 
     });
+
+    test('should add 3 new todos in order', async({page}) => {
+        const todos = ['Task 1', 'Task 2', 'Task3']
+
+        for (const todo of todos){
+            await page.getByTestId('text-input').fill(todo);
+            await page.keyboard.press('Enter');
+        }
+        //Check that there are exactly 3 todos
+        const todoItems = page.locator('.todo-list li');
+        await expect(todoItems).toHaveCount(3);
+
+        //Check that the todos text matches in the same order
+        const texts = await todoItems.allTextContents();
+        expect(texts).toEqual(todos);
+    });
 });
