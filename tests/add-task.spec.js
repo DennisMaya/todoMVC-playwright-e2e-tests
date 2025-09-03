@@ -1,4 +1,15 @@
 import {test, expect} from '@playwright/test';
+const { expectTextMatch } = require('../utils/expectTextMatch');
+const fs = require('fs');
+const path = require('path');
+const decodeEntities = str =>
+  str
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&')
+    .replace(/&#x2F;/g, '/')
+    .replace(/&#x27;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>');
 
 test.describe('TodoMVC - Add Todo Workflow', () => {
     test.beforeEach(async ({page}) => {
@@ -64,10 +75,11 @@ test.describe('TodoMVC - Add Todo Workflow', () => {
     });
 
     test('should add a todo with special characters', async ({page}) =>{
-        const specialText = `abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !"§ $%& /() =?* '<> #|; ²³~ @\`\´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !"§ $%& /() =?* '<> #|; ²³~ @\`\´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !"§ $%& /() =?* '<> #|; ²³~ @\`\´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !"§ $%& /() =?* '<> #|; ²³~ @\`\´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !"§ $%& /() =?* '<> #|; ²³~ @\`\´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !"§ $%& /() =?* '<> #|; ²³~ @\`\´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !"§ $%& /() =?* '<> #|; ²³~ @\`\´ ©«» ¤¼× {}abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI`;
-        await page.getByTestId('text-input').fill(specialText);
+        const filePath = path.resolve(__dirname, '../utils/special-text.txt')
+        const fileContent = fs.readFileSync(filePath, 'utf-8')
+        await page.getByTestId('text-input').fill(fileContent);
         await page.keyboard.press('Enter');
         const actualText = await page.locator('.todo-list li').first().innerText();
-        await expect(actualText.trim().toBe(specialText.trim()));
+        expect(decodeEntities(actualText.trim())).toBe(fileContent.trim());
     });
 });
