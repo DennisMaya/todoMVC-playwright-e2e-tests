@@ -11,28 +11,33 @@ The goal of this project is to demonstrate:
 
 ---
 
-## ✅ Test Coverage
+## ✅ Test Coverage by Workflow
 
-### **1. Add a New Task**
-- Navigates to the TodoMVC app
-- Adds a single task
-- Verifies it appears in the list
+### 🟩 Add Task Workflow
+- Adds a single task and verifies it appears
+- Clears input after adding a task
+- Adds three tasks in order and verifies sequence
+- Trims whitespace from input before saving
+- Rejects empty string input
+- Rejects whitespace-only input
+- Adds a task with long paragraph text
+- Adds a task with special characters from a `.txt` file and verifies correct rendering
 
-### **2. Complete a Task**
+### ✅ Complete Task Workflow
 - Adds a task
 - Marks it as completed
 - Verifies the checkbox is checked
 
-### **3. Delete a Task**
+### ❌ Delete Task Workflow
 - Adds a task
 - Deletes it via the UI
 - Verifies the list is empty
 
-### **4. Filter Tasks**
+### 🔍 Filter Task Workflow
 - Adds multiple tasks
 - Marks one as completed
 - Uses the **Active** filter to show only active tasks
-- Verifies the correct task is displayed
+- Verifies that only the correct task is displayed
 
 ---
 
