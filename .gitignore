@@ -3,7 +3,7 @@ node_modules/
 
 # Playwright test results & reports
 test-results/
-# playwright-report/
+playwright-report-*
 blob-report/
 trace.zip
 
