@@ -1,4 +1,4 @@
-name: Deploy Playwright Report to GitHub Pages
+name: Run Playwright Tests and Deploy Report
 
 on:
   push:
@@ -11,21 +11,20 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-      with:
-        persist-credentials: false
 
     - name: Install dependencies
-      run: npm install
-
-    - name: Install Playwright browsers
-      run: npx playwright install
+      run: npm ci
 
     - name: Run Playwright tests
-      run: npx playwright test --reporter html
+      run: npx playwright test --reporter=html
 
-    - name: Deploy HTML report to GitHub Pages
+    - name: Deploy report to GitHub Pages
+      if: always()  # Run even if tests fail
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: playwright-report
         publish_branch: gh-pages
+        keep_files: true
+        user_name: github-actions[bot]
+        user_email: github-actions[bot]@users.noreply.github.com
