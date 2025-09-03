@@ -11,7 +11,7 @@ export default defineConfig({
   },
   fullyParallel: true,
   retries: 2,
-  reporter: [['html', { outputFolder: 'playwright-report', open: 'never' }]],
+  reporter: [['html', { outputFolder: `playwright-report-${Date.now()}` }]],
   use: {
     headless: true,       // don't show the browser
     slowMo: 500,           // slow down actions for visibility
