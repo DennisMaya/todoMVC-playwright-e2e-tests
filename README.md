@@ -15,12 +15,12 @@ The goal of this project is to demonstrate:
 
 ### 🟩 Add Task Workflow
 - Adds a single task and verifies it appears
-- Clears input after adding a task
+- Verifies input is cleared after adding a task
 - Adds three tasks in order and verifies sequence
-- Trims whitespace from input before saving
-- Rejects empty string input
-- Rejects whitespace-only input
-- Adds a task with long paragraph text
+- Verifies whitespace is trimmed from input before adding
+- Verifies an empty string input is rejected
+- Verifies a whitespace-only input is rejected
+- Verifies a task with long paragraph text is added
 - Adds a task with special characters from a `.txt` file and verifies correct rendering
 
 ### ✅ Complete Task Workflow
