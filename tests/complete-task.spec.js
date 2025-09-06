@@ -94,5 +94,27 @@ test.describe('TodoMVC - Complete Todo Workflow', () => {
         const todoItems = page.locator('.todo-list li');
         await expect(todoItems).toHaveCount(Math.ceil(todos.length / 2));
     });
+
+    test('should update items left counter', async({page}) => {
+        const todos = ['Task 2', 'Task 3', 'Task 4'];
+
+        for (const todo of todos){
+            await page.getByTestId('text-input').fill(todo);
+            await page.keyboard.press('Enter');
+        }
+        
+        const counter = page.locator('.todo-count');
+        const checkboxes = page.locator('.todo-list li input[type="checkbox"]');
+        const count = await checkboxes.count();
+
+        await expect(counter).toHaveText(`${count} items left!`);
+
+        for (let i = 0; i < count; i++){
+            await checkboxes.nth(i).check();
+            const remaining = count - (i + 1);
+            const label = remaining === 1 ? 'item' : 'items';
+            await expect(counter).toHaveText(`${remaining} ${label} left!`);
+        }
+    });
 });
 
