@@ -71,5 +71,28 @@ test.describe('TodoMVC - Complete Todo Workflow', () => {
 
     });
 
+    test('should only clear completed tasks', async({page}) => {
+        const todos = ['Task 2', 'Task 3', 'Task 4'];
+
+        for (const todo of todos){
+            await page.getByTestId('text-input').fill(todo);
+            await page.keyboard.press('Enter');
+        }
+        
+        const checkboxes = page.locator('.todo-list li input[type="checkbox"]');
+        const count = await checkboxes.count();
+
+        for (let i = 0; i < count; i++){
+            if ((i + 1) % 2 === 0) {
+                await checkboxes.nth(i).check();
+            }
+        }
+
+        const clearCompleted = await page.getByRole('button', {name: 'Clear completed'});
+        await clearCompleted.click();
+
+        const todoItems = page.locator('.todo-list li');
+        await expect(todoItems).toHaveCount(Math.ceil(todos.length / 2));
+    });
 });
 
