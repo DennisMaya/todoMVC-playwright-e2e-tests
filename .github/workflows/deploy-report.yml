@@ -19,7 +19,7 @@ jobs:
       run: npx playwright install
 
     - name: Clean previous report
-      run: rm -rf playwright-report
+      run: rm -rf playwright-report-*
 
     - name: Run Playwright tests
       run: npx playwright test --reporter=html

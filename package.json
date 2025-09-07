@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "playwright test --reporter=html",
+    "test:ci": "playwright test --reporter=html",
+    "clean:reports": "rimraf --glob playwright-report-*"
   },
   "keywords": [],
   "author": "",
@@ -11,6 +13,7 @@
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.55.0",
-    "playwright": "^1.55.0"
+    "playwright": "^1.55.0",
+    "rimraf": "^6.0.1"
   }
 }
