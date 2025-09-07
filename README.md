@@ -9,6 +9,8 @@ The goal of this project is to demonstrate:
 - **Clear, maintainable test code** with stable selectors
 - **Real‑world QA thinking** by covering essential user scenarios
 
+> ⚠️ This project is still a **work in progress**. Additional test cases and CI enhancements are actively being developed.
+
 ---
 
 ## ✅ Test Coverage by Workflow
@@ -24,9 +26,12 @@ The goal of this project is to demonstrate:
 - Adds a task with special characters from a `.txt` file and verifies correct rendering
 
 ### ✅ Complete Task Workflow
-- Adds a task
-- Marks it as completed
-- Verifies the checkbox is checked
+- Verifies a task is marked as completed
+- Verifies a task can be unmarked as completed
+- Verifies multiple tasks can be marked as completed
+- Verifies pressing "Clear completed" button clears the completed tasks
+- Verifies that only completed tasks are cleared when "Clear completed" is pressed
+- Verifies the item counter is updated when a task is marked as completed
 
 ### ❌ Delete Task Workflow
 - Adds a task
@@ -46,3 +51,5 @@ The goal of this project is to demonstrate:
 - **JavaScript** — test implementation
 - **HTML Reporter** — for visual test results
 - **Chromium, Firefox, WebKit** — cross‑browser coverage
+- **GitHub Actions** - for CI test runs and report deployment
+- **Rimraf** - for cleaning up report folders on Windows
