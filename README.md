@@ -16,7 +16,7 @@ The goal of this project is to demonstrate:
 ## ✅ Test Coverage by Workflow
 
 ### 🟩 Add Task Workflow
-- Adds a single task and verifies it appears
+- Verifies a task appears when added
 - Verifies input is cleared after adding a task
 - Adds three tasks in order and verifies sequence
 - Verifies whitespace is trimmed from input before adding
@@ -34,21 +34,18 @@ The goal of this project is to demonstrate:
 - Verifies the item counter is updated when a task is marked as completed
 
 ### ❌ Delete Task Workflow
-- Adds a task
-- Deletes it via the UI
-- Verifies the list is empty
+- Verifies a task can be deleted
+- Verifies an empty list when all tasks are deleted
 
 ### 🔍 Filter Task Workflow
-- Adds multiple tasks
-- Marks one as completed
-- Uses the **Active** filter to show only active tasks
-- Verifies that only the correct task is displayed
+- Verifies only incompleted tasks are displayed when Active filter is toggled
+- Verifies only completed tasks are displayed when Completed filter is toggled
 
 ---
 
 ## 🛠 Tech Stack
 - **Playwright Test Runner** — for browser automation
-- **JavaScript** — test implementation
+- **JavaScript/TypeScript** — test implementation
 - **HTML Reporter** — for visual test results
 - **Chromium, Firefox, WebKit** — cross‑browser coverage
 - **GitHub Actions** - for CI test runs and report deployment
