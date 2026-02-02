@@ -42,8 +42,7 @@ test.describe('TodoMVC - Add Todo Workflow', () => {
         await expect(todoItems).toHaveCount(3);
 
         //Check that the todos text matches in the same order
-        const texts = await todoItems.allTextContents();
-        expect(texts).toEqual(todos);
+        await expect(page.locator('.todo-list li')).toHaveText(todos);
     });
 
     test('should trim white space from text input after adding todo', async ({page}) => {
