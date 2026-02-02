@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test';
 
-test.describe('TodoMVC - Complete User Journey Workflow', () => {
+test.describe('TodoMVC - Filter Todos Workflow', () => {
     test.beforeEach(async ({page}) => {
         await page.goto('https://todomvc.com/examples/react/dist/');
         
@@ -26,8 +26,19 @@ test.describe('TodoMVC - Complete User Journey Workflow', () => {
         await page.getByTestId('footer-navigation').getByText('Active').click();
 
         //Assert only "Buy eggs" is visible
-        const list = await page.locator('.todo-list li');
+        const list = page.locator('.todo-list li');
         await expect(list).toHaveCount(1);
         await expect(list).toHaveText('Buy eggs');
     });
+
+    test('should display completed tasks', async({page}) => {
+        //click the Completed filter
+        await page.getByTestId('footer-navigation').getByText('Completed').click();
+
+        //Assert only "Buy milk" is visible
+        const list = page.locator('.todo-list li');
+        await expect(list).toHaveCount(1);
+        await expect(list).toHaveText('Buy milk');
+    });
+
 });
