@@ -21,7 +21,7 @@ test.describe('TodoMVC - Filter Todos Workflow', () => {
 
     });
 
-    test('should display active tasks', async({page}) => {
+    test('should display single active task', async({page}) => {
         //Click the Active filter
         await page.getByTestId('footer-navigation').getByText('Active').click();
 
@@ -31,7 +31,7 @@ test.describe('TodoMVC - Filter Todos Workflow', () => {
         await expect(list).toHaveText('Buy eggs');
     });
 
-    test('should display completed tasks', async({page}) => {
+    test('should display single completed task', async({page}) => {
         //click the Completed filter
         await page.getByTestId('footer-navigation').getByText('Completed').click();
 
